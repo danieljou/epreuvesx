@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %} Login {% endblock title %}
+
+{% block styles %}
+  
+{% endblock styles %}
+
+
+{% block content %}
+
+    <div class="container my-4 login_page">
+        <div class="row justify-content-center my-5">
+            <div class="card  col-8 p-0 my-5">
+                <div class="card-header bg-success text-light">
+                    Connectez-vous
+                </div>
+
+                <div class="card-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+
+                        <div class="my-3">
+                            <label for="">Nom d'utilisateur</label>
+                            <input type="text" class="form-control" name="login" placeholder="Votre nom d'utilisateur">
+                        </div>
+                        <div class="my-3">
+                            <label for="">Mot de passe</label>
+                            <input type="password" class="form-control" name="password" placeholder="Votre mot de passe">
+                        </div>
+                        <input type="submit" value="Se connecter" class="btn btn-success">
+                        <!-- <div class="mb-3 text-center">
+                            <a href="">Mot de passe oublier ? <span class="text-dark">Reinitialiser</span></a>
+                        </div> -->
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock content %}
+
+
+
+
+
+
+
+

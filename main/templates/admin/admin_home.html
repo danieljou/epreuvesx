@@ -1,0 +1,119 @@
+{% extends "base2.html" %}
+
+{%block title %} Accueil - Admin {% endblock %}
+
+{% block styles %}
+  
+
+<style>
+        @keyframes identifier {
+            from{
+                opacity: 0;
+                margin-top: 1000px;
+            }
+            to{
+                opacity: 1;
+                margin-top: initial;
+            }
+        }
+        .dash-item{
+            animation: identifier 2s;
+        }
+</style>
+{% endblock styles %}
+
+{% block content %}
+    <div class="container">
+        <div class="title my-3">
+            <h1 class="text-center">
+                <p>BIENVENUE</p>
+                <hr>
+            </h1>
+        </div>
+    </div>
+
+    <div class="container-fluid my-3">
+        <div class="dashbord">
+            
+            <div class="dash-item" data-href="{% url 'account_management' %}">
+                <div class="dash-element">
+                    <div class="dash-icon bg-primary">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                    </div>
+                    <div class="dash-text">
+                        Utilisatreurs
+                    </div>
+                    <div class="values">
+                        {{account_count}}
+                    </div>
+                </div>
+            </div>
+            <div class="dash-item" data-href="{% url 'exercices_homes' %}">
+                <div class="dash-element">
+                    <div class="dash-icon bg-violet">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                    </div>
+                    <div class="dash-text">
+                        Exercices
+                    </div>
+                    <div class="values">
+                        {{exercice_count}}
+                    </div>
+                </div>
+            </div>
+            <div class="dash-item" data-href="{% url 'epreuves_homes' %}">
+                <div class="dash-element">
+                    <div class="dash-icon bg-danger">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                    </div>
+                    <div class="dash-text">
+                        Epreuves
+                    </div>
+                    <div class="values"> {{epreuve_count}} </div>
+                </div>
+            </div>
+            <div class="dash-item" data-href="{% url 'matieres_homes' %}">
+                <div class="dash-element">
+                    <div class="dash-icon bg-warning">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                    </div>
+                    <div class="dash-text">
+                        Matières
+                    </div>
+                    <div class="values">
+                        {{matiere_count}}
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+    <script>
+        var all_dash_item = document.querySelectorAll('.dash-item');
+        var delay = 0.5;
+        for(let i = 0; i < all_dash_item.length; i ++){
+            var element = all_dash_item[i];
+            element.style.animationDuration = delay+'s';
+            delay = delay+ 0.5;
+            element.onclick = function () {
+                var href = element.dataset.href;
+                window.location.href(href);
+            }
+        }   
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', ()=>{
+            const items = document.querySelectorAll('.dash-item');
+            items.forEach(row =>{
+                row.addEventListener('click', ()=>{
+                    window.location.href = row.dataset.href
+                });
+            });
+        });
+    </script>
+{% endblock scripts %}

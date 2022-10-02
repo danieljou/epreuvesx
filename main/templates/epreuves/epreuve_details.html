@@ -1,0 +1,42 @@
+{% extends "base2.html" %}
+{% block title %}
+    Epreuves 
+{% endblock title %}
+
+
+
+{% block content %}
+
+<div class="container">
+    <a href="{% url 'douwnload_epreuve_pdf' epreuve.id %}" class="btn my-3 btn-primary" target="_blank"> <i class="fa fa-print" aria-hidden="true"></i> Télécharger le pdf</a>
+
+</div>
+
+        <div class="container ">
+            <div class="row justify-content-center">
+                <div class="card col-8">
+                    <div class="card-header">
+                        <h2 class="text-center">
+                            {{epreuve}}
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <h3>
+                            Matière : {{epreuve.matiere }}
+                        </h3>
+                        <br>
+                        {% for exercie in  exercices %}
+                            <div class="exercices">
+                                <strong>Exercice  {{forloop.counter}} : {{exercie.Titre}}</strong>
+                                <p>{{exercie.Enonce |linebreaks }}</p>
+                                <strong>Questions</strong>
+                                <p>{{exercie.Question |linebreaks }}</p>
+                            </div>
+                            <hr>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+{% endblock content %}

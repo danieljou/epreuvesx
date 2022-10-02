@@ -1,0 +1,97 @@
+{% extends "base2.html" %}
+
+{% block title %}
+    Gestion Des utilisateurs
+{% endblock title %}
+
+{% block styles %}
+  
+{% endblock styles %}
+
+{% block content %}
+<div class="container">
+    <div class="title my-3">
+        <h1 class="text-center">
+            <p>Gestion des utilisateurs</p>
+            <hr>
+        </h1>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-right">
+        <div class="d-flex flex-row-reverse">
+            <p>
+                <a href ="{% url 'account_add_user' %}" class="btn btn-primary">
+                    <i class="fa fa-user-plus" aria-hidden="true"></i> Ajouter
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+<div class="table-responsive card">
+    <div class="card-body">
+        <table id="studenttable" class="table table-bordered table-hover" data-page-length='100'>
+            <thead class="thead-light">
+              <tr>
+                  <th width="5%">#</th>
+                  
+                  <th>Nom</th>
+                  <th>Prénom</th>
+                  <th width="10%">Nom d'utilisateur</th>
+                  <th width="10%">Rôles</th>
+                  <th width="5%">Traitement</th>
+              </tr>
+            </thead>
+            <tbody>
+      
+              {% for item in all_account %}
+                      <div class="div">
+                          <tr class="hoverview" data-href="">
+                                  <td>{{ forloop.counter }}</td>
+                                  
+                                 
+                                  <td>{{ item.last_name }}</td>
+                                  <td> {{item.first_name}} </td>
+                                  <td> {{item.username}} </td>
+                                  <td> 
+                                    <ul>
+                                        {% if item.is_admin %}
+                                            <li>Administrateur</li>
+                                        {% endif %} 
+                                        {% if item.is_professeur %}
+                                            <li>Professeur</li>
+                                        {% endif %} 
+                                    </ul>
+                                  </td>
+                                  <td>
+                                      <a href="{% url 'account_upadate_user' item.id %}" class=" mx-1"> <i class="fa fa-pencil text-dark" aria-hidden="true"></i> </a>
+                                      <a href="{% url 'account_delete_user' item.id %}" class=" "> <i class="fa fa-trash text-dark" aria-hidden="true"></i> </a>
+                                  </td>
+                              </a>
+                          </tr>
+                      </div>
+                  {% endfor %}
+      
+            </tbody>
+          </table>
+    </div>
+    
+</div>
+
+
+
+
+  
+{% endblock content %}  
+
+{% block scripts %}
+    
+<script>
+    $('#studenttable').DataTable({
+    });
+</script>
+
+{% endblock scripts %}

@@ -1,0 +1,53 @@
+{% extends "base2.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Profile
+{% endblock title %}
+
+{% block styles %}
+  
+{% endblock styles %}
+
+{% block content %}
+<div class="container">
+    <div class="title my-3">
+        <h1 class="text-center">
+            <p>Profile</p>
+            <hr>
+        </h1>
+    </div>
+</div>
+
+<div class="container justify-content-center d-flex">
+    <div class="col-8 ">
+        <div class="card">
+            <div class="card-header bg-primary">
+                    Modifier votre P    ofiler
+            </div>
+           <div class="card-body">  
+            <form action="" method="post"  enctype="multipart/form-data">
+                {% csrf_token %}    
+                {{form |crispy}}
+                <input type="submit" value="Enregister" class="btn btn-success">
+            </form>
+           </div>
+        </div>
+        
+    </div>
+</div>
+
+
+
+  
+{% endblock content %}  
+
+{% block scripts %}
+    
+<script>
+    $('#studenttable').DataTable({
+    });
+</script>
+
+{% endblock scripts %}

@@ -1,0 +1,454 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <link rel="shortcut icon" href="{% static 'img/banner.jpg' %}" type="image/x-icon">
+    <title>  {% block title %}  {% endblock %} </title>
+    <!-- Font Awesome -->
+       <!-- MDB -->
+       
+       <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mdb.min.css' %}" />
+   
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'fontAwesone/css/all.min.css' %}" />
+    
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet"
+      href="{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/Datatables/datatables.min.css' %}" />
+    <!-- Theme style -->
+    
+    <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/toastr/toastr.min.css' %}">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet"
+      href="{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/Datatables/datatables.min.css' %}" />
+    <!-- Theme style -->
+    <link
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
+    rel="stylesheet">
+    <style>
+      .bg-pperso{
+        background-color: rgb(0, 102, 255);
+        color: white;
+      }
+
+      .bg-pperso2{
+        background-color: rgb(0, 102, 255);
+        color: white;
+      }
+
+      select.form-control-sm{
+        padding: 0 22px ;
+        
+        
+      }
+      
+
+      
+.loader{
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+
+  z-index: 11;
+  top: 0;
+  background-color: rgba(92, 94, 94, 0.751);
+  display: none;
+  justify-content: center;
+  align-items: center;
+
+
+}
+
+.cont{
+  background-color: white;
+  width: 500px;
+  height: 200px;
+  border-radius: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+    </style>
+
+    <style>
+      .mb-3p{
+        margin-bottom: -20px;
+        margin-top: 20px;
+      }
+      .mb-3p .icopp{
+        transform: translateX(10px) translateY(-47px);
+        color: rgba(0, 0, 0, 0.685);
+      }
+      .mb-3p input,.mb-3p select {
+        padding-left: 38px;
+        
+      }
+
+      .dashbord{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .dash-item{
+        width: 25%;
+    }
+    .dash-element{
+        display: flex;
+        padding: 10px;
+        margin: auto;
+        width: 95%;
+        background-color: rgb(255, 255, 255);
+        margin-bottom: 30px;
+        box-shadow: 0px 0px 6px rgba(81, 81, 81, 0.568);
+        border-radius: 3px;
+        height: 80px;
+        align-items: center;
+    }
+    .dash-element .dash-icon{
+        width: 28%;
+        border-radius: 7px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+        height: 100%;
+       
+    }
+    .dash-element .dash-icon i{
+      opacity: 0.5;
+    }
+    .dash-element .dash-text{
+        margin-left: 5px;
+        width: 60%;
+    }
+    .dash-element .values{
+      float: right;
+      font-size: 22px;
+      color: orange;
+      font-weight: bold;
+    }
+    @media all and (max-width:1200px){
+        .dash-item{
+            width: 33.33%;
+        }
+    }
+    @media all and (max-width:800px){
+        .dash-item{
+            width: 50%;
+        }
+    }
+
+    @media all and (max-width:576px){
+        .dash-item{
+            width: 100%;
+        }
+    }
+    .bg-violet{
+        background-color: blueviolet;
+    }
+    .bg-magenta{
+        background-color: magenta;
+    }
+
+    .img{
+      width: 70%;
+      display: flex;
+      justify-content: center;
+      margin: auto;
+      margin-bottom: 20px;
+      align-items: center;
+    }
+    .img img{
+      width: 90%;
+      border-radius: 100%;
+    }
+    
+    </style>
+
+    {% block styles %}  {% endblock %}
+</head>
+<body>
+    <!--Main Navigation-->
+    <header >
+        <!-- Sidebar -->
+        <nav
+             id="sidebarMenu"
+             class="collapse d-lg-block sidebar collapse bg-ligth  bg-pperso"
+             >
+          <div class="position-sticky">
+            <div class="list-group list-group-flush mx-3 mt-4 ">
+            
+                <div class="account my-3">
+                    <div class="img text-center" style="font-size:100px;">
+                        {% if   request.user.photo %} <img src="{{request.user.photo.url}}" alt=""> {% endif %}
+                        
+                        {% comment %} <i class="fa fa-user-circle" aria-hidden="true"></i> {% endcomment %}
+                    </div>
+                    <div class="name text-center bg-light p-2">
+                        <strong>
+                          {{request.user.last_name}}
+                          {{request.user.first_name}} 
+                        </strong>
+                    </div>
+                </div>
+              
+                {% if dash %}
+                    <a
+                        href="{% url 'admin_home' %}"
+                        class="list-group-item bg-pperso2 list-group-item-action py-2 ripple active">
+                        <i class="fas fa-fas fa-home me-3" aria-hidden="true"></i></i> <span>Acceuil</span>
+                    </a>
+                    {% else %}
+                    
+                    <a
+                        href="{% url 'admin_home' %}"
+                        class="list-group-item bg-pperso2 list-group-item-action py-2 ripple">
+                        <i class="fas fa-fas fa-home me-3" aria-hidden="true"></i></i> <span>Acceuil</span>
+                    </a>
+              {% endif %}
+
+                {% if request.user.is_admin %}
+                {% if dash %}
+                <a
+                  href="{% url 'account_management' %}"
+                  class="list-group-item bg-pperso2 list-group-item-action py-2 ripple active">
+                  <i class="fas fa-users-cog me-3" aria-hidden="true"></i></i> <span>Comptes</span>
+                </a>
+                {% else %}
+              
+                <a
+                  href="{% url 'account_management' %}"
+                  class="list-group-item bg-pperso2 list-group-item-action py-2 ripple">
+                  <i class="fas fa-users-cog me-3" aria-hidden="true"></i></i> <span>Comptes</span>
+                </a>
+                {% endif %}
+
+              {% endif %}
+              <!-- Home  -->
+              {% if home %} 
+      
+              <a
+                 href="{% url 'exercices_homes' %}"
+                 class="list-group-item bg-pperso2 list-group-item-action py-2 ripple active">
+                 <i class="fa fa-book me-3" aria-hidden="true"></i></i> <span>Exercices</span>
+              </a>
+              {% else %}
+      
+      
+              <a
+              href="{% url 'exercices_homes' %}"
+              class="list-group-item bg-pperso2 list-group-item-action py-2 ripple">
+              <i class="fa fa-book me-3" aria-hidden="true"></i></i><span>Exercices</span>
+           </a>
+      
+              {% endif %}
+      
+              {% if request.user.is_admin %}
+              {% if home %} 
+      
+              <a
+                 href="{% url 'matieres_homes' %}"
+                 class="list-group-item bg-pperso2 list-group-item-action py-2 ripple active">
+                 <i class="fa fa-pen me-3" aria-hidden="true"></i></i> <span>Matieres</span>
+              </a>
+              {% else %}
+      
+      
+              <a
+              href="{% url 'matieres_homes' %}"
+              class="list-group-item bg-pperso2 list-group-item-action py-2 ripple">
+              <i class="fa fa-pen me-3" aria-hidden="true"></i></i><span>Matieres</span>
+           </a>
+      
+              {% endif %}
+              {% endif %}
+      
+
+              <!-- /home  -->
+              {% if request.user.is_admin %}
+              {% if des %} 
+              
+                <a
+                href="{% url 'epreuves_homes' %}"
+                class="list-group-item bg-pperso2 list-group-item-action py-2 ripple active">
+                <i class="fas fa-graduation-cap fa-fw me-3" aria-hidden="true"></i> </i><span>Epreuves</span>
+                </a>
+              {% else %}
+                  <a
+                  href="{% url 'epreuves_homes' %}"
+                  class="list-group-item bg-pperso2 list-group-item-action py-2 ripple">
+                  <i class="fas fa-graduation-cap fa-fw me-3" aria-hidden="true"></i> </i><span>Epreuves</span>
+                 </a>
+              {% endif %}
+              {% endif %}
+      
+            
+      
+              
+             
+              
+             
+             
+              {% if profile %}
+              
+              <a
+              href="{% url 'profile_user' %}"
+              class="list-group-item bg-pperso2 list-group-item-action py-2 ripple active"
+              ><i class="fas fa-user-cog fa-fw me-3"></i><span>Profile</span></a
+             >
+      
+              {% else %}
+              <a
+              href="{% url 'profile_user' %}"
+              class="list-group-item bg-pperso2 list-group-item-action py-2 ripple"
+              ><i class="fas fa-user-cog fa-fw me-3"></i><span>Profile</span></a
+             >
+              {% endif %}  
+              
+             
+              
+             
+              
+              
+             
+            </div>
+          </div>
+        </nav>
+        <!-- Sidebar -->
+      
+        <!-- Navbar -->
+        <nav
+             id="main-navbar"
+             class="navbar navbar-expand-lg navbar-light bg-white fixed-top "
+             >
+          <!-- Container wrapper -->
+          <div class="container-fluid">
+            <!-- Toggle button -->
+            <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-mdb-toggle="collapse"
+                    data-mdb-target="#sidebarMenu"
+                    aria-controls="sidebarMenu"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                    >
+              <i class="fas fa-bars" id="bars"></i>
+            </button>
+      
+            <!-- Brand -->
+            <a class="navbar-brand " href="#">
+              <i class="fa fa-graduation-cap" aria-hidden="true" style="font-size: 40px;"></i>
+            </a>
+            <!-- Search form -->
+            
+      
+            <!-- Right links -->
+            <ul class="navbar-nav ms-auto d-flex flex-row ">
+              <!-- Notification dropdown -->
+             
+               
+                
+                 
+              <!-- Avatar -->
+              <li class="nav-item dropdown mx-5">
+               
+                <a
+                   class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"
+                   href="#"
+                   id="navbarDropdownMenuLink"
+                   role="button"
+                   data-mdb-toggle="dropdown"
+                   aria-expanded="false"
+                   >
+                   {{ user.username}}
+                  <i class="fas fa-user-cog mx-1"></i>
+                </a>
+                <ul
+                    class="dropdown-menu dropdown-menu-end"
+                    aria-labelledby="navbarDropdownMenuLink"
+                    >
+                  <li><a class="dropdown-item" href=  "{% url 'profile_user' %}">Profile</a></li>
+                  
+                  <li><a class="dropdown-item" href="{% url 'users_logout' %}">Déconnexion</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <!-- Container wrapper -->
+        </nav>
+        <!-- Navbar -->
+      </header>
+<!--Main Navigation-->
+
+<!--Main layout-->
+<main style="margin-top: 58px">
+  <div class="container pt-4">
+   
+    {% block content %}  
+
+    {% endblock %}
+  </div>
+</main>
+<!--Main layout-->
+    <!-- MDB -->
+    <script type="text/javascript" src="{% static 'js/jquery-3.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+    
+    
+    
+    <script src="{% static 'dist/js/jquery.formset.js' %}"> </script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"> </script>
+    
+    
+    <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'dist/js/jquery.formset.js' %}"> </script>
+    <!-- Bootstrap -->
+    <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'plugins/toastr/toastr.min.js' %}"></script>
+    <!-- overlayScrollbars -->
+    <script
+      src="{% static 'plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
+    
+    <!-- AdminLTE App -->
+    <script src="{% static 'dist/js/adminlte.js' %}"></script>
+    
+    <!-- OPTIONAL SCRIPTS -->
+    <script src="{% static 'dist/js/demo.js' %}"></script>
+{% if messages %}
+{% for message in messages %}
+<script type=text/javascript>
+  toastr.options.progressBar = true;
+  toastr.{{ message.tags }}('{{ message }}')
+</script>
+{% endfor %}
+{% endif %}
+
+<script src="{% static 'plugins/Datatables/datatables.min.js' %}"></script>
+
+<script>
+(function ($) {
+  $('.clickable-row').css('cursor', 'pointer');
+  $(".clickable-row").click(function () {
+    window.location = $(this).data("href");
+  });
+})(jQuery)
+
+</script>
+
+{%block scripts %} 
+
+{% endblock %}
+</body>
+</html>
+

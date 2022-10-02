@@ -1,0 +1,74 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <title>
+        {% block title %}
+          
+        {% endblock title %}
+    </title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%} ">
+    <link rel="stylesheet" href="{% static 'fontAwesone/css/all.min.css' %}" />
+    
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet"
+      href="{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/Datatables/datatables.min.css' %}" />
+    <!-- Theme style -->
+    
+    <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/toastr/toastr.min.css' %}">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet"
+      href="{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/Datatables/datatables.min.css' %}" />
+
+    <link rel="stylesheet" href="{% static 'css/mdb.min.css'%} ">
+
+    
+    <link rel="stylesheet" href="{% static 'css/styles.css'%} ">
+    
+    <!-- Pour les styles css qu'on ourra ajouter -->
+    {% block styles %} {% endblock styles %}
+
+  </head>
+  <body>
+      <!-- Le contenu de la page -->
+    {% block content %} {% endblock content %}
+
+
+    <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+
+
+
+<script src="{% static 'dist/js/jquery.formset.js' %}"> </script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"> </script>
+
+
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'dist/js/jquery.formset.js' %}"> </script>
+<!-- Bootstrap -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'plugins/toastr/toastr.min.js' %}"></script>
+<!-- overlayScrollbars -->
+<script
+  src="{% static 'plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
+
+<!-- AdminLTE App -->
+<script src="{% static 'dist/js/adminlte.js' %}"></script>
+
+
+
+    <!-- le javascript additionnel  -->
+
+    {% block scritps %} {% endblock scritps %}
+
+  </body>
+</html>

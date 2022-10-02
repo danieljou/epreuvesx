@@ -1,0 +1,92 @@
+{% extends "base2.html" %}
+
+{% block title %}
+    Gestion Des utilisateurs
+{% endblock title %}
+
+{% block styles %}
+  
+{% endblock styles %}
+
+{% block content %}
+<div class="container">
+    <div class="title my-3">
+        <h1 class="text-center">
+            <p>Acceuil Professeur</p>
+            <hr>
+        </h1>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card ">
+                <div class="card-header bg-success">
+                    MES EXERCICES
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div class="f">
+                        <h1>  <i class="fas fa-book-open    "></i></h1>
+                        </div>
+                        <div class="f text-success">
+                            <h1>{{all_exercice}}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header  bg-primary">
+                    TOUT LES EXERCICES
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div class="f">
+                          <h1>  <i class="fas fa-book-open    "></i></h1>
+                        </div>
+                        <div class="f text-primary">
+                            <h1>{{exercice_count}}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header  bg-warning">
+                    TOUTES LES EPREUVES
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div class="f">
+                          <h1>  <i class="fas fa-book-open    "></i></h1>
+                        </div>
+                        <div class="f text-warning">
+                            <h1>{{epreuve_count}}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+       
+
+    </div>
+</div>
+
+  
+{% endblock content %}  
+
+{% block scripts %}
+    
+<script>
+
+</script>
+
+{% endblock scripts %}

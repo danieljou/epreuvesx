@@ -1,0 +1,1 @@
+web gunicorn Epreuves.wsgi:application --log-file -

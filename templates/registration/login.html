@@ -1,0 +1,131 @@
+<!doctype html>
+{% load static %}
+{% load crispy_forms_tags %}
+<html lang="en">
+  <head>
+    <title>
+        {% block title %}
+          
+        {% endblock title %}
+    </title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%} ">
+    <link rel="stylesheet" href="{% static 'fontAwesone/css/all.min.css' %}" />
+    
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet"
+      href="{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/Datatables/datatables.min.css' %}" />
+    <!-- Theme style -->
+    
+    <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/toastr/toastr.min.css' %}">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet"
+      href="{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/Datatables/datatables.min.css' %}" />
+
+    <link rel="stylesheet" href="{% static 'css/mdb.min.css'%} ">
+
+    
+    <link rel="stylesheet" href="{% static 'css/styles.css'%} ">
+    
+    <!-- Pour les styles css qu'on ourra ajouter -->
+    {% block styles %} {% endblock styles %}
+
+    <style>
+      i{
+        font-size: 100px;
+      }
+      body{
+        background-size: cover;
+      }
+    </style>
+  </head>
+  <body>
+      <!-- Le contenu de la page -->
+    {% block content %} {% endblock content %}
+
+
+    <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+
+
+
+<script src="{% static 'dist/js/jquery.formset.js' %}"> </script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"> </script>
+
+
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'dist/js/jquery.formset.js' %}"> </script>
+<!-- Bootstrap -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'plugins/toastr/toastr.min.js' %}"></script>
+<!-- overlayScrollbars -->
+<script
+  src="{% static 'plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
+
+<!-- AdminLTE App -->
+<script src="{% static 'dist/js/adminlte.js' %}"></script>
+
+
+
+    <!-- le javascript additionnel  -->
+
+    {% block scritps %} 
+    
+    <div class="container  mt-5 p-5">
+        <div class="row justify-content-center">
+              <div class="card col-md-6 col-sm-12 {% if form.errors %} {% else %} formulaire {% endif %}">
+                  <div class="card-body">
+                      
+                          <form  method="post" novalidate autocomplete="off">
+                              <div class="row justify-content-center mb-3 us">
+                                  <strong> <h4 class="text-success text-center my-3">
+                                    <i class="fas fa-user-lock    "></i>
+                                  </h4> </strong>
+                              </div>
+                              {% csrf_token %}
+                            
+                                
+                                  
+                                      {% if form.errors %}
+                                      <div class="alert alert-danger" role="alert">
+                                          Saisissez un nom d’utilisateur et un mot de passe valides. Remarquez que chacun de ces champs est sensible à la casse (différenciation des majuscules/minuscules).
+                                      </div>
+                                      {% endif %}
+                                  
+                                
+                              
+                             <div class="mb-2 mt-1">
+                                  <div class="mb-3p">
+                                      {{ form.username|as_crispy_field}}
+                                     
+                                  </div>
+                             </div>
+  
+                              <div class="mb-3">
+                                  <div class="mb-3p">
+                                      {{ form.password|as_crispy_field}}
+                                      
+                                      
+                                  </div>
+                              </div>
+  
+                              
+                              <button type="submit" class="btn btn-primary mt-5" id="check"> Se Connecter</button>
+                          </form>
+                      
+                  </div>
+              </div>
+        </div>
+      </div>
+    {% endblock scritps %}
+
+  </body>
+</html>

@@ -1,0 +1,107 @@
+{% extends "base2.html" %}
+
+{% block title %}
+    Epreuves 
+{% endblock title %}
+
+
+{% block styles %}
+  
+{% endblock styles %}
+
+{% block content %}
+<div class="container">
+    <div class="title my-3">
+        <h1 class="text-center">
+            <p>Epreuves</p>
+            <hr>
+        </h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row justify-content-right">
+        <div class="d-flex flex-row-reverse">
+            <p>
+                <a href ="{% url 'add_epreuve' %}" class="btn btn-primary">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Ajouter
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="card">
+        <div class="card-header bg-primary text-light">
+            <div class="row">
+                <div class="col-md-9">
+                    <h3>Liste des epreuves</h3>
+                </div>
+                
+            </div>
+        </div>
+        <div class="table-responsive">
+           
+            <div class="card-body">
+                <table id="studenttable" class="table table-bordered table-hover" data-page-length='100'>
+                    <thead class="thead-light">
+                    <tr>
+                        <th width="1%"></th>
+                       
+                        <th >Titre </th>
+                        <th >Matière </th>
+                        <th >Nombre d'exercices  </th>
+                        <th width="3">Traitement </th>
+                        
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in all_epreuve %}
+                        <tr data-href="">
+                            <td> {{forloop.counter}} </td>
+                            
+                            <td> <a href="{% url 'details_epreuve' item.id %}">
+                                {{item}}    
+                            </a> </td>
+                            <td> {{item.matiere}}</td>
+                            
+                            <td> {{item.Nombre_exerce}}</td>
+                            <td> <a href="{% url 'delete_epreuve' item.id %}"> <i class="fa fa-trash" aria-hidden="true"></i> </a></td>
+                            
+                        </tr>
+                        {% endfor %}
+            
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", ()=>{
+        const rows = document.querySelectorAll('tr[data-href]');
+        rows.forEach(row =>{
+            row.addEventListener('click',()=>{
+                window.location.href = row.dataset.href; 
+            });
+        });
+    });
+</script>
+  
+{% endblock content %}  
+
+{% block scripts %}
+  
+
+
+
+<script>
+    $('#studenttable').DataTable({
+    });
+</script>
+
+{% endblock scripts %}
