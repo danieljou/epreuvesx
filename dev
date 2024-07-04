@@ -1,0 +1,90 @@
+Deploiment de l'application CYCEIS MOBILE en local
+
+Pre-requis
+
+Node v20.9.0
+Jre 1.8
+JDK 17
+Android stutio
+
+
+Configuration des variable d'environnement
+
+
+ANDROID_HOME : lien vers le sdk android qui se sera créé à l'installation d'endroid sutio
+
+JAVA_HOME : lien vers le dossier ou se trouve le jdk ; ex : C:\Program Files\Java\jdk-17
+
+dans le path ajouter le lien vers le fichier bin du jdk
+
+
+Installation de react native
+Pour installer react native il faut le faire à l'aide de node :  npm install -g expo-cli
+
+Intallation des dépendances
+Pour le faire il faut taper la commande :
+
+npm install
+
+
+
+Lancement du serveur de developpement
+
+# utilier la commande
+npm start
+
+
+
+Deploiement de l'application en production
+ceci est une opération qui se fait en 3 étapes
+
+Création de la clé key store () : aller dans le dossier bin
+
+
+
+  keytool -genkeypair -v -storetype PKCS12 -keystore my-upload-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+   # valididy 10000 corresppond au nombre de jours
+   # Keysize correspond à la taille
+   # my-upload-key.keystore est le nom et l'extension su fichier de sortie
+   # -alias c'est pour donner une alias tel : my-key-alias
+
+
+
+
+Déplacer le fichier créé pour le bon emplacement : le fichier créér aura le non de my-upload-key.keystore : dans le dossier android puis app copier et coller votre fichier keystore
+
+
+Dans le fichier graddle.properties qui se trouve dans : android> ajouter le code suivant
+
+hermesEnabled=true
+MYAPP_UPLOAD_STORE_FILE=my-upload-key.keystore
+MYAPP_UPLOAD_KEY_ALIAS=my-key-alias
+MYAPP_UPLOAD_STORE_PASSWORD=*********************
+MYAPP_UPLOAD_KEY_PASSWORD=*********************
+# ******************* est le mot de passe démandé lors de la création de la cle
+# MYAPP_UPLOAD_STORE_FILE est le nom du fichier keysotre généré qui se trouve dans le même dossier que gradle.properties
+# MYAPP_UPLOAD_KEY_ALIAS est l'alias donné é la clé plus haut
+
+
+
+
+dans le fichier network_security_config qui se trouve dans android\app\src\main\res\xml\network_security_config.xml : la ligne <domain includeSubdomains="true">192.168.3.18</domain> permet d'ajouter une adresse ip ou une url dans l'application sera autorisée à effectuer des communication http ou https ; de préférence ou plus clairement c'est l'adressen sur laquelle le backend est exposé en réseau ; de plus la même adresse doit se mettre dans le ficier env.ts qui se trouve dans src\constants\env.ts au niveau de : BACKEND_API_URL et il faudrait ajouter le port et le slash à la fin
+
+
+Pour générer l'apk :
+
+
+
+cd android
+
+
+
+ #Créer debug build:
+gradlew assembleDebug
+# ou ./gradlew assembleDebug sous linux
+
+
+
+#Create release build:
+./gradlew assembleRelease
+#l'apk dgénére se trouvera dans  android/app/build/outputs/apk
